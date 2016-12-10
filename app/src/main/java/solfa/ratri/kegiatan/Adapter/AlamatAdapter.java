@@ -69,4 +69,22 @@ public class AlamatAdapter extends ListAdapter<ModelApi.Venues, AlamatHolder> {
             }
         });
     }
+
+    public void search(String query){
+        Call<ModelApi> call = service.searchLocation(mId, mSecret, mV, mLl, query);
+        call.enqueue(new Callback<ModelApi>() {
+            @Override
+            public void onResponse(Call<ModelApi> call, Response<ModelApi> response) {
+                if (response.isSuccessful()){
+                    clearAll();
+                    add(response.body().getResponse().getVenues());
+                } else Log.e("ERROR", "not success : "+response.raw());
+            }
+
+            @Override
+            public void onFailure(Call<ModelApi> call, Throwable t) {
+                Log.e("ERROR", ""+t);
+            }
+        });
+    }
 }

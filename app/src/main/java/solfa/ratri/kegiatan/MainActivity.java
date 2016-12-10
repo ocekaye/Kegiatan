@@ -2,6 +2,9 @@ package solfa.ratri.kegiatan;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 
 import solfa.ratri.kegiatan.Fragment.BaseFragment;
 import solfa.ratri.kegiatan.Fragment.FragmentAdd;
@@ -22,8 +25,8 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         Intent i = getIntent();
         if (i != null && i.getExtras() != null)
-            getSupportFragmentManager().beginTransaction().replace(R.id.container, getFragment(i)).commit();
-        else getSupportFragmentManager().beginTransaction().replace(R.id.container, new MainActivityFragment()).commit();
+            startFragment(getFragment(i));
+        else startFragment(new MainActivityFragment());
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(showBackButton());
         getSupportActionBar().setDisplayShowHomeEnabled(showBackButton());

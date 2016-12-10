@@ -34,7 +34,7 @@ public class KegiatanAdapter extends ListAdapter<KegiatanModel, AlamatHolder> {
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.container, new FragmentDetail(model)).addToBackStack(null).commit();
+                activity.startFragment(new FragmentDetail(model));
             }
         });
     }

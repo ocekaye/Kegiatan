@@ -55,7 +55,7 @@ public class MainActivityFragment extends BaseFragment {
 //                startActivity(i);
                 FragmentAdd lokasi = new FragmentAdd();
                 lokasi.setTargetFragment(MainActivityFragment.this, 0);
-                getBaseActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, lokasi).addToBackStack(null).commit();
+                getBaseActivity().startFragment(lokasi);
             }
         });
 
@@ -69,5 +69,10 @@ public class MainActivityFragment extends BaseFragment {
     @Override
     public String setTitle() {
         return "Home";
+    }
+
+    @Override
+    public boolean enableSearch() {
+        return false;
     }
 }

@@ -41,4 +41,9 @@ public class FragmentDetail extends BaseFragment {
     public String setTitle() {
         return kegiatanModel.getNama();
     }
+
+    @Override
+    public boolean enableSearch() {
+        return false;
+    }
 }

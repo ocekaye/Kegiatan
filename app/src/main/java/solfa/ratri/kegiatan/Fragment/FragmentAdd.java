@@ -20,6 +20,7 @@ import solfa.ratri.kegiatan.Adapter.KegiatanModel;
 import solfa.ratri.kegiatan.BaseActivity;
 import solfa.ratri.kegiatan.DB.DBHelper;
 import solfa.ratri.kegiatan.FourSquare.ModelApi;
+import solfa.ratri.kegiatan.LocationHelper;
 import solfa.ratri.kegiatan.MainActivity;
 import solfa.ratri.kegiatan.R;
 
@@ -54,6 +55,7 @@ public class FragmentAdd extends BaseFragment implements DatePickerDialog.OnDate
         btnSave = (Button) v.findViewById(R.id.btn_save);
 
         getBaseActivity().setOnBackButtonEnable();
+        LocationHelper.grantLocationPermition(getBaseActivity());
 
         if (lokasi != null){
             txtAlamat.setText(lokasi.getName()+"\n"+lokasi.getLocation().getFullAdress());
@@ -81,7 +83,7 @@ public class FragmentAdd extends BaseFragment implements DatePickerDialog.OnDate
                 getBaseActivity().startActivity(i);*/
                 FragmentLokasi lokasi = new FragmentLokasi();
                 lokasi.setTargetFragment(FragmentAdd.this, 0);
-                getBaseActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, lokasi).addToBackStack(null).commit();
+                getBaseActivity().startFragment(lokasi);
             }
         });
 
@@ -99,6 +101,7 @@ public class FragmentAdd extends BaseFragment implements DatePickerDialog.OnDate
                 model.setTanggal(editTime.getText().toString());
                 model.setAlamat(txtAlamat.getText().toString());
                 model.setLl(ll);
+
                 ((MainActivityFragment) getTargetFragment()).addData(model);
                 getBaseActivity().onBackPressed();
             }
@@ -130,5 +133,10 @@ public class FragmentAdd extends BaseFragment implements DatePickerDialog.OnDate
     @Override
     public String setTitle() {
         return "Tambah Kegiatan";
+    }
+
+    @Override
+    public boolean enableSearch() {
+        return false;
     }
 }

@@ -12,4 +12,9 @@ public interface APIService {
     Call<ModelApi> getLocation(@Query("client_id") String client_id, @Query("client_secret") String client_secret,
                                @Query("v") String v, @Query("radius") String radius,
                                @Query("ll") String ll);
+
+    @GET("search")
+    Call<ModelApi> searchLocation(@Query("client_id") String client_id, @Query("client_secret") String client_secret,
+                               @Query("v") String v,
+                               @Query("ll") String ll, @Query("query") String query);
 }
