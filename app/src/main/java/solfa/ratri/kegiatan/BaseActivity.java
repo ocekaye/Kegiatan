@@ -54,4 +54,18 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public  void setOnBackButtonEnable(){
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+    }
+
+    public  void setOnBackButtonDisble(){
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setDisplayShowHomeEnabled(false);
+    }
+
+    public void setTitle(String title){
+        getSupportActionBar().setTitle(title);
+    }
 }

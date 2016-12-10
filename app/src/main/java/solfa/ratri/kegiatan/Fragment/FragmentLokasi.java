@@ -41,5 +41,8 @@ public class FragmentLokasi extends BaseFragment {
         return v;
     }
 
-
+    @Override
+    public String setTitle() {
+        return "Pilih Lokasi";
+    }
 }

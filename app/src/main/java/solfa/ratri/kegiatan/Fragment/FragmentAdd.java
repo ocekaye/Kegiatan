@@ -3,6 +3,7 @@ package solfa.ratri.kegiatan.Fragment;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,9 @@ import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.util.Calendar;
 
+import solfa.ratri.kegiatan.Adapter.KegiatanModel;
 import solfa.ratri.kegiatan.BaseActivity;
+import solfa.ratri.kegiatan.DB.DBHelper;
 import solfa.ratri.kegiatan.FourSquare.ModelApi;
 import solfa.ratri.kegiatan.MainActivity;
 import solfa.ratri.kegiatan.R;
@@ -29,7 +32,15 @@ public class FragmentAdd extends BaseFragment implements DatePickerDialog.OnDate
     Button btnAlamat, btnSave;
     ModelApi.Venues lokasi;
 
+    DBHelper mDbHelper;
+
     public FragmentAdd() {
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mDbHelper = new DBHelper(getContext());
     }
 
     @Override
@@ -41,6 +52,9 @@ public class FragmentAdd extends BaseFragment implements DatePickerDialog.OnDate
         editTime = (EditText) v.findViewById(R.id.date);
         btnAlamat = (Button) v.findViewById(R.id.btn_lokasi);
         btnSave = (Button) v.findViewById(R.id.btn_save);
+
+        getBaseActivity().setOnBackButtonEnable();
+
         if (lokasi != null){
             txtAlamat.setText(lokasi.getName()+"\n"+lokasi.getLocation().getFullAdress());
         }
@@ -71,6 +85,25 @@ public class FragmentAdd extends BaseFragment implements DatePickerDialog.OnDate
             }
         });
 
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String ll = "";
+                if(lokasi != null){
+                    ll = lokasi.getLocation().getLng()+","+lokasi.getLocation().getLat();
+                }
+                mDbHelper.inputKegiatan(editNama.getText().toString(), lokasi.getName(), editTime.getText().toString(), txtAlamat.getText().toString(), ll);
+                KegiatanModel model = new KegiatanModel();
+                model.setNama(editNama.getText().toString());
+                model.setNamaTempat(lokasi.getName());
+                model.setTanggal(editTime.getText().toString());
+                model.setAlamat(txtAlamat.getText().toString());
+                model.setLl(ll);
+                ((MainActivityFragment) getTargetFragment()).addData(model);
+                getBaseActivity().onBackPressed();
+            }
+        });
+
         return v;
     }
 
@@ -92,5 +125,10 @@ public class FragmentAdd extends BaseFragment implements DatePickerDialog.OnDate
 
     public void setLokasi(ModelApi.Venues l){
         lokasi = l;
+    }
+
+    @Override
+    public String setTitle() {
+        return "Tambah Kegiatan";
     }
 }

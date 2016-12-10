@@ -43,7 +43,7 @@ public class MainActivity extends BaseActivity {
                 return new FragmentLokasi();
             case FRAGMENT_DETAIL:
                 isEnableBackButton = true;
-                return new FragmentDetail();
+                return new FragmentDetail(null);
             default:
                 isEnableBackButton = false;
                 return new MainActivityFragment();
