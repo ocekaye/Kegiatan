@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import solfa.ratri.kegiatan.Fragment.BaseFragment;
+import solfa.ratri.kegiatan.Fragment.MainActivityFragment;
 
 /**
  * Created by Hinata on 12/9/2016.
@@ -40,9 +41,12 @@ public abstract class BaseActivity extends AppCompatActivity{
     private FragmentManager.OnBackStackChangedListener backStackChangedListener = new FragmentManager.OnBackStackChangedListener() {
         @Override
         public void onBackStackChanged() {
-            fragment = (BaseFragment) getSupportFragmentManager().findFragmentById(R.id.container);
-            fragment.setTitle();
-            fragment.setHasSearchView();
+            if (getSupportFragmentManager().getBackStackEntryCount()>1){
+                fragment = (BaseFragment) getSupportFragmentManager().findFragmentById(R.id.container);
+                fragment.setTitle();
+                fragment.setHasSearchView();
+            }
+
         }
     };
 
@@ -53,7 +57,7 @@ public abstract class BaseActivity extends AppCompatActivity{
         mSearchMenuItem = menu.findItem(R.id.action_search);
         mSearchView = (SearchView) MenuItemCompat.getActionView(mSearchMenuItem);
         mSearchView.setSubmitButtonEnabled(true);
-        fragment.setHasSearchView();
+        if (fragment != null) fragment.setHasSearchView();
         return true;
     }
 
@@ -121,7 +125,8 @@ public abstract class BaseActivity extends AppCompatActivity{
     }
 
     public void startFragment(BaseFragment fragment){
-//        this.fragment = fragment;
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).addToBackStack(null).commit();
+        if (fragment instanceof MainActivityFragment)
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
+        else getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).addToBackStack(null).commit();
     }
 }
