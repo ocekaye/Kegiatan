@@ -4,12 +4,14 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
@@ -47,12 +49,12 @@ public class FragmentAdd extends BaseFragment implements DatePickerDialog.OnDate
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_add, container, false);
-        txtAlamat = (TextView) v.findViewById(R.id.txt_lokasi);
-        editNama = (EditText) v.findViewById(R.id.edit_name);
-        editTime = (EditText) v.findViewById(R.id.date);
-        btnAlamat = (Button) v.findViewById(R.id.btn_lokasi);
-        btnSave = (Button) v.findViewById(R.id.btn_save);
+        View v = inflater.inflate(R.layout.fragment_tambah, container, false);
+        txtAlamat = (TextView) v.findViewById(R.id.t_tempat);
+        editNama = (EditText) v.findViewById(R.id.et_kegiatan);
+        editTime = (EditText) v.findViewById(R.id.et_tanggal);
+        btnAlamat = (Button) v.findViewById(R.id.btn_tempat);
+        btnSave = (Button) v.findViewById(R.id.btn_tambah);
 
         getBaseActivity().setOnBackButtonEnable();
         LocationHelper.grantLocationPermition(getBaseActivity());
@@ -75,6 +77,22 @@ public class FragmentAdd extends BaseFragment implements DatePickerDialog.OnDate
             }
         });
 
+        btnAlamat.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b){
+                    FragmentLokasi lokasi = new FragmentLokasi();
+                    lokasi.setTargetFragment(FragmentAdd.this, 0);
+                    getBaseActivity().startFragment(lokasi);
+                }
+                /*Intent i = new Intent(getContext(), MainActivity.class);
+                i.putExtra(BaseActivity.EXTRA_FRAGMENT_TYPE, BaseActivity.FRAGMENT_LOKASI);
+                getBaseActivity().startActivity(i);*/
+
+            }
+        });
+
+
         btnAlamat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,20 +108,35 @@ public class FragmentAdd extends BaseFragment implements DatePickerDialog.OnDate
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String ll = "";
-                if(lokasi != null){
-                    ll = lokasi.getLocation().getLng()+","+lokasi.getLocation().getLat();
-                }
-                mDbHelper.inputKegiatan(editNama.getText().toString(), lokasi.getName(), editTime.getText().toString(), txtAlamat.getText().toString(), ll);
-                KegiatanModel model = new KegiatanModel();
-                model.setNama(editNama.getText().toString());
-                model.setNamaTempat(lokasi.getName());
-                model.setTanggal(editTime.getText().toString());
-                model.setAlamat(txtAlamat.getText().toString());
-                model.setLl(ll);
+                String nama = editNama.getText().toString();
+                String tanggal = editTime.getText().toString();
+                String tempat = txtAlamat.getText().toString();
 
-                ((MainActivityFragment) getTargetFragment()).addData(model);
-                getBaseActivity().onBackPressed();
+                if(!nama.isEmpty() && !tanggal.isEmpty() && !tempat.isEmpty()) {
+                    String ll = "";
+                    if(lokasi != null){
+                        ll = lokasi.getLocation().getLng()+","+lokasi.getLocation().getLat();
+                    }
+                    mDbHelper.inputKegiatan(editNama.getText().toString(), lokasi.getName(), editTime.getText().toString(),lokasi.getLocation().getFullAdress(), ll);
+                    KegiatanModel model = new KegiatanModel();
+                    model.setNama(editNama.getText().toString());
+                    model.setNamaTempat(lokasi.getName());
+                    model.setTanggal(editTime.getText().toString());
+                    model.setAlamat(lokasi.getLocation().getFullAdress());
+                    model.setLl(ll);
+
+                    ((MainActivityFragment) getTargetFragment()).addData(model);
+                    getBaseActivity().onBackPressed();
+
+                } else {
+                    Toast.makeText(getBaseActivity(), "Isi belum lengkap!", Toast.LENGTH_SHORT).show();
+                }
+//                String ll = "";
+//                if(lokasi != null){
+//                    ll = lokasi.getLocation().getLng()+", "+lokasi.getLocation().getLat();
+//                }
+
+
             }
         });
 

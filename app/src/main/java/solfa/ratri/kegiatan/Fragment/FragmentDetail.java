@@ -23,14 +23,15 @@ public class FragmentDetail extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        String titik_dua = ": ";
         View v = inflater.inflate(R.layout.fragment_detail, container, false);
         txtTempat = (TextView) v.findViewById(R.id.txt_tempat);
         txtTanggal = (TextView) v.findViewById(R.id.txt_tanggal);
         txtAlamat = (TextView) v.findViewById(R.id.txt_alamat);
         txtLonglat = (TextView) v.findViewById(R.id.txt_longlat);
         getBaseActivity().setOnBackButtonEnable();
-        txtTempat.setText(kegiatanModel.getNamaTempat());
-        txtTanggal.setText(kegiatanModel.getTanggal());
+        txtTempat.setText(titik_dua+kegiatanModel.getNamaTempat());
+        txtTanggal.setText(titik_dua+kegiatanModel.getTanggal());
         txtAlamat.setText(kegiatanModel.getAlamat());
         txtLonglat.setText(kegiatanModel.getLl());
 

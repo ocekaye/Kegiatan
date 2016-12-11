@@ -68,7 +68,7 @@ public class MainActivityFragment extends BaseFragment {
 
     @Override
     public String setTitle() {
-        return "Home";
+        return "Daftar Kegiatan";
     }
 
     @Override
