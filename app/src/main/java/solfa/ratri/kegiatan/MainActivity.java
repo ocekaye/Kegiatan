@@ -28,8 +28,8 @@ public class MainActivity extends BaseActivity {
             startFragment(getFragment(i));
         else startFragment(new MainActivityFragment());
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(showBackButton());
-        getSupportActionBar().setDisplayShowHomeEnabled(showBackButton());
+        /*getSupportActionBar().setDisplayHomeAsUpEnabled(showBackButton());
+        getSupportActionBar().setDisplayShowHomeEnabled(showBackButton());*/
     }
 
     private BaseFragment getFragment(Intent i){
