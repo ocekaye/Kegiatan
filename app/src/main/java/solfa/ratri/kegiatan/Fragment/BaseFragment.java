@@ -21,7 +21,6 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        System.out.println("onresumeFragment");
         getBaseActivity().setTitle(setTitle());
         getBaseActivity().hasSearchView(enableSearch());
     }
