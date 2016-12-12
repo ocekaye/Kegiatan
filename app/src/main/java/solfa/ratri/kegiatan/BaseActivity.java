@@ -53,7 +53,6 @@ public abstract class BaseActivity extends AppCompatActivity{
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        System.out.println("onCreateOptionMenu");
         getMenuInflater().inflate(R.menu.menu_main, menu);
         mSearchMenuItem = menu.findItem(R.id.action_search);
         mSearchView = (SearchView) MenuItemCompat.getActionView(mSearchMenuItem);
