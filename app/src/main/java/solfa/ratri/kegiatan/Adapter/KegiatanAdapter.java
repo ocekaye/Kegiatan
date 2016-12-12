@@ -10,7 +10,7 @@ import solfa.ratri.kegiatan.Holder.AlamatHolder;
 import solfa.ratri.kegiatan.R;
 
 /**
- * Created by Hinata on 12/10/2016.
+ * Created by Ratri on 12/10/2016.
  */
 public class KegiatanAdapter extends ListAdapter<KegiatanModel, AlamatHolder> {
     BaseActivity activity;

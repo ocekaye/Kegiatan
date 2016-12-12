@@ -13,7 +13,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Created by Hinata on 12/9/2016.
+ * Created by Ratri on 12/9/2016.
  */
 public class ServiceGenerator {
     public static final String BASE_URL = "https://api.foursquare.com/v2/venues/";

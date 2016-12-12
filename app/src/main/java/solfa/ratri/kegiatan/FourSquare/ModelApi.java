@@ -6,7 +6,7 @@ import java.util.List;
 import retrofit2.Call;
 
 /**
- * Created by Hinata on 12/9/2016.
+ * Created by Ratri on 12/9/2016.
  */
 public class ModelApi {
     public Response response;

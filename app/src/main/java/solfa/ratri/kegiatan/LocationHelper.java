@@ -9,7 +9,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 
 /**
- * Created by Hinata on 12/10/2016.
+ * Created by Ratri on 12/10/2016.
  */
 public class LocationHelper {
     private static final String APP_LOCATION = "location";

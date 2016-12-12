@@ -12,7 +12,7 @@ import java.util.List;
 import solfa.ratri.kegiatan.Adapter.KegiatanModel;
 
 /**
- * Created by Hinata on 12/10/2016.
+ * Created by Ratri on 12/10/2016.
  */
 public class DBHelper extends SQLiteOpenHelper {
     private static final String TEXT_TYPE = " TEXT";

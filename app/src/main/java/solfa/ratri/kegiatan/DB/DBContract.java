@@ -3,7 +3,7 @@ package solfa.ratri.kegiatan.DB;
 import android.provider.BaseColumns;
 
 /**
- * Created by Hinata on 12/10/2016.
+ * Created by Ratri on 12/10/2016.
  */
 public class DBContract {
 

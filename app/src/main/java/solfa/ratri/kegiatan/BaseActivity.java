@@ -13,7 +13,7 @@ import solfa.ratri.kegiatan.Fragment.BaseFragment;
 import solfa.ratri.kegiatan.Fragment.MainActivityFragment;
 
 /**
- * Created by Hinata on 12/9/2016.
+ * Created by Ratri on 12/9/2016.
  */
 public abstract class BaseActivity extends AppCompatActivity{
     public static final int FRAGMENT_HOME = 0;

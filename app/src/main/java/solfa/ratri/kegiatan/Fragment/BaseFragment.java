@@ -7,7 +7,7 @@ import android.view.MenuInflater;
 import solfa.ratri.kegiatan.BaseActivity;
 
 /**
- * Created by Hinata on 12/9/2016.
+ * Created by Ratri on 12/9/2016.
  */
 public abstract class BaseFragment extends Fragment {
     public abstract String setTitle();

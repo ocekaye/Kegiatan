@@ -3,7 +3,7 @@ package solfa.ratri.kegiatan.Adapter;
 import android.database.Cursor;
 
 /**
- * Created by Hinata on 12/10/2016.
+ * Created by Ratri on 12/10/2016.
  */
 public class KegiatanModel {
     int id;

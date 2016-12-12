@@ -15,7 +15,7 @@ import solfa.ratri.kegiatan.Fragment.FragmentAdd;
 import solfa.ratri.kegiatan.Holder.AlamatHolder;
 
 /**
- * Created by Hinata on 12/10/2016.
+ * Created by Ratri on 12/10/2016.
  */
 public class AlamatAdapter extends ListAdapter<ModelApi.Venues, AlamatHolder> {
     BaseActivity activity;
